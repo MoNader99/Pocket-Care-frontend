@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+.wrapper{
+  zoom:100%;
+  background: rgb(0,70,189);
+  background: linear-gradient(180deg, rgba(0,70,189,1) 50%, rgba(64,121,217,1) 100%);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: 800;
+  letter-spacing: .015em;
+  display: flex;
+  position: relative;
+  color: #b3b3b3 !important;
+  text-transform: none;
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.wrapper .sidebar{
+  margin-top: 45px;
+  width: 200px;
+  height: 100%;
+  background: rgb(0,70,189);
+  background: linear-gradient(180deg, rgba(0,70,189,1) 50%, rgba(64,121,217,1) 100%);
+  padding: 20px 0px;
+  position: fixed;
+}
+
+.wrapper .sidebar ul{
+  padding-inline-start: 3px;
+  
+}
+
+.wrapper .sidebar ul .List,.List2 {
+  list-style-type: none;
+  padding: 10px;
+  padding-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 6px;
+  cursor: pointer;
+ 
+} 
+.wrapper .active{
+background-color: rgba(255, 0, 0, 0.3);
+}   
+
+.wrapper .sidebar ul li a{
+  color: #ffffff;
+  text-align: start;
+  text-decoration: none;
+  display: block;
+  background-color: transparent;
+  border-radius: 0px 0px 0px 0px ;
+  transition: background-color .5s ease-out 50ms;
+  transition: border-radius 0.3s ease-out 100ms;
+}
+
+.wrapper .sidebar ul li a .fas{
+  width: 40px;
+  vertical-align: middle;
+}
+
+.wrapper .sidebar ul li a:hover{
+  color: black;
+  border-radius: 25px 0px 0px 25px ;
+  background-color: white;
+}
+    
+.wrapper .sidebar ul li:hover a{
+    color: black;
+}
+
+.wrapper .sidebar ul #Playlist{
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 11.2px;
+  letter-spacing: 2px;
+  padding-left: 25px;
+  padding-top: 15px;
+}
+
+.wrapper .sidebar hr{
+  width: 160px;
+  border-bottom: 0.3px solid #282828;
+    
+}
+
+.wrapper #my-playlist::-webkit-scrollbar {
+  width: 15px;
+  background-color: black;
+}
+.wrapper .my-playlists {
+  font-weight: 300;
+  height: 262px;
+  overflow-y: auto !important;
+  scrollbar-width: thin;
+}
+
+.wrapper #my-playlist::-webkit-scrollbar-thumb {
+  background-color: #505050 ;
+  border-radius: 0px;
+} 
+.wrapper .sidebar a.active{
+    color: black;
+    border-radius: 25px 0px 0px 25px ;
+    background-color: white;
+}
+
+
+@media (max-width: 500px)
+{
+  .wrapper{
+    display: none;
+  }
+}
+
+

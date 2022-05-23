@@ -1,0 +1,23 @@
+.portal-home-page .content-portal{
+    margin-left: 200px;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    min-height: 100vh;
+  }
+  .portal-home-page body{
+    background-color: rgb(18,18,18) !important;
+  }
+  
+  .portal-home-page .side-bar-portal{
+    float: left;
+    width: 230px;
+  }
+  
+  @media (max-width: 500px)
+  {
+    .portal-home-page .content-portal{
+      margin-left: 0;
+      left: auto;
+      right: auto;
+    }
+  }

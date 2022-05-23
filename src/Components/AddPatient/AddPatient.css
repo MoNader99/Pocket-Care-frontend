@@ -1,0 +1,42 @@
+.add-patient{
+    margin-top: 40px;
+    padding: 25px;
+}
+
+.add-patient .switch-field {
+    display: flex;
+    overflow: hidden;
+  }
+  
+  .add-patient .switch-field input {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    width: 1px;
+    border: 0;
+    overflow: hidden;
+  }
+  
+  .add-patient .switch-field label {
+    border-radius: 5px;
+    background-color: #DCDCDC;
+    color: black;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    padding: 8px 16px;
+    margin-right: 5px;
+    transition: all 0.1s ease-in-out;
+  }
+  
+  .add-patient .switch-field label:hover {
+    cursor: pointer;
+  }
+  
+  .add-patient .switch-field input:checked + label {
+    color:white;
+    background-color: #00B52B;
+    box-shadow: none;
+  }
+  

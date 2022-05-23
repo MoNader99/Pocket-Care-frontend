@@ -1,0 +1,46 @@
+.prescriptions-page{
+    margin-top: 40px;
+    padding: 25px;
+}
+
+.prescriptions-page .header{
+    border-radius: 5px;
+    background-color: #F5F5F5;
+    padding: 10px;
+    border: 1px solid #A4A3B0;
+}
+
+.prescriptions-page .tabs{
+    border-radius: 5px;
+    background-color: #DDDDDD;
+    padding: 5px;
+    border: 1px solid #A4A3B0;
+}
+
+.prescriptions-page .tab{
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    color: #0046BD; 
+    background-color:white;
+    padding:10px;
+    border-radius:15px;
+}
+
+.prescriptions-page .tab-un-pressed{
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    color: #0046BD; 
+    padding:10px;
+    border-radius:15px;
+}
+
+.prescriptions-page .Templates{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #707070;
+    background-color: #F5F5F5;
+    color:#707070;
+    border-radius: 10px;
+}
