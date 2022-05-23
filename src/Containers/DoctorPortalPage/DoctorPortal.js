@@ -12,6 +12,7 @@ import PatientListPage from '../../Components/PatientList/PatientListPage'
 import PrescriptionsPage from '../../Components/Prescriptions/PrescriptionsPage'
 import AccountSettings from '../../Components/AccountSettings/AccountSettings'
 import MoreDetailsPage from '../../Components/MoreDetails/MoreDetailsPage';
+import ChatPage from '../../Components/ChatPage/ChatPage';
 
 class DoctorPortalHomePage extends React.Component {
 
@@ -32,6 +33,7 @@ class DoctorPortalHomePage extends React.Component {
                 <Route  path="/DoctorPortal/Prescriptions" component={PrescriptionsPage}></Route>
                 <Route  path="/DoctorPortal/AccountSettings" component={AccountSettings}></Route>
                 <Route  path="/DoctorPortal/PatientDetails" component={MoreDetailsPage}></Route>
+                <Route  path="/DoctorPortal/Chat" component={ChatPage}></Route>
             </Switch>
         </div>
         </div>

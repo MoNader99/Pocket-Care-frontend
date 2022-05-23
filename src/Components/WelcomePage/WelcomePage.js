@@ -2,6 +2,7 @@ import React from 'react';
 import "./WelcomePage.css"
 
 class WelcomePage extends React.Component {
+        
     render() {
       return (
       <div className="welcome-page">
@@ -122,8 +123,17 @@ class WelcomePage extends React.Component {
                         <h2 className="mb-4">Ready to get started? Contact us Now!</h2>
                         <div className="row">
                             <div className="col">
+                                <input className="form-control form-control-lg"  type="text" placeholder="Name"/>
+                            </div>
+                            
+                        </div>
+                        <div className="row mt-2">
+                            <div className="col">
                                 <input className="form-control form-control-lg" id="emailAddressBelow" type="email" placeholder="Email Address"/>
                             </div>
+                            
+                        </div>
+                        <div className="row mt-2">
                             <div className="col">
                                 <input className="form-control form-control-lg" type="Text" placeholder="Mobile Number" />
                             </div>
