@@ -1,5 +1,7 @@
 import React from 'react';
 import './PrescriptionsPage.css';
+import {connect} from "react-redux";
+import {BASEURL} from '../../Containers/baseurl/baseurl';
 
 class PrescriptionsPage extends React.Component {
     state={
@@ -33,6 +35,47 @@ class PrescriptionsPage extends React.Component {
 
       selectedTemplate:"",
       selectedDrug:"",
+    }
+
+    componentWillMount(){
+      this.GetPresTemplate()
+    }
+
+    GetPresTemplate(){
+      var url = BASEURL+ "/prescriptiontemplate/" + this.props.DoctorID; 
+      const requestOptions = {
+          method: 'GET',
+        };
+      fetch(url,requestOptions)
+      .then((response) => { return response.json()})
+      .then((data) => {
+        if(data.length >=1){
+        this.setState({
+          Prescriptions:data
+        });
+      }
+        this.GetSavedDrugs()
+      })
+      .catch((error)=>{console.log(error);
+      })
+    }
+
+    GetSavedDrugs(){
+      var url = BASEURL+ "/saveddrugs/" + this.props.DoctorID; 
+      const requestOptions = {
+          method: 'GET',
+        };
+      fetch(url,requestOptions)
+      .then((response) => { return response.json()})
+      .then((data) => {
+        if(data.length >=1){
+        this.setState({
+          savedDrugs:data
+        });
+      }
+      })
+      .catch((error)=>{console.log(error);
+      })
     }
 
     changeLayout=(event,str,index)=>{
@@ -690,5 +733,10 @@ class PrescriptionsPage extends React.Component {
       );
     } 
   }
-  
-  export default PrescriptionsPage;
+  const mapStateToProps = state =>{
+    return{
+      DoctorID:state.DoctorID
+    };
+  };
+
+  export default connect(mapStateToProps, null)(PrescriptionsPage);

@@ -1,6 +1,8 @@
 import React from 'react';
 import './PatientListPage.css';
 import { Link } from 'react-router-dom';
+import {connect} from "react-redux";
+import {BASEURL} from '../../Containers/baseurl/baseurl';
 
 class PatientListPage extends React.Component {
   componentDidMount(){
@@ -8,22 +10,64 @@ class PatientListPage extends React.Component {
       startIndex: 0,
       EndIndex:5,
     });
-    var url = "http://localhost:3000/connection/626712ae151a84b9a5774442"; 
-    const requestOptions = {
-      method: 'GET',
-      // headers: {'Content-Type': 'application/json' },
-      // body:JSON.stringify({ doctorId: "62670bffc0be9f9f433f16c9" })
-    };
-    fetch(url,requestOptions)
-      .then((response) => { return response.json() })
+    }
+    componentWillMount(){
+      this.GetPatients()
+    }
+
+    GetPatients(){
+      var url = BASEURL+ "/connection/" + this.props.DoctorID; 
+      const requestOptions = {
+          method: 'GET',
+        };
+      fetch(url,requestOptions)
+      .then((response) => { return response.json()})
       .then((data) => {
-        // console.log(data)
-        this.setState({ 
-          PatientInfo: data
+        console.log(data)
+        this.setState({
+          PatientInfo:data
         });
-        
+        this.GetTotalPatients()
       })
-      .catch((error)=>{console.log(error);})
+      .catch((error)=>{console.log(error);
+      })
+    }
+
+    filterTodayPatients(){
+      var url = BASEURL+ "/connection/today/" + this.props.DoctorID; 
+      const requestOptions = {
+          method: 'GET',
+        };
+      fetch(url,requestOptions)
+      .then((response) => { return response.json()})
+      .then((data) => {
+        console.log(data)
+        this.setState({
+          PatientInfo:data
+        });
+        this.GetTotalPatients()
+      })
+      .catch((error)=>{console.log(error);
+      })
+    }
+
+
+    filterFollowUpPatients(){
+      var url = BASEURL+ "/connection/lastdays/" + this.props.DoctorID; 
+      const requestOptions = {
+          method: 'GET',
+        };
+      fetch(url,requestOptions)
+      .then((response) => { return response.json()})
+      .then((data) => {
+        console.log(data)
+        this.setState({
+          PatientInfo:data
+        });
+        this.GetTotalPatients()
+      })
+      .catch((error)=>{console.log(error);
+      })
     }
 
     constructor() {
@@ -149,7 +193,7 @@ class PatientListPage extends React.Component {
                   <Link to="/DoctorPortal/PatientDetails" style={{fontSize:"12px",fontWeight:"bold",color:"#00318B"}}>More Details</Link>
                 </div>
                 <div className="more-info">
-                  <i className="fas fa-comment-alt fa-2x" style={{color:"#727175"}}></i>
+                <i class="fas fa-comment-alt fa-2x" onClick={(event)=>window.location.replace("/DoctorPortal/Chat")} style={{color:"#727175",cursor:"pointer"}}></i>
                 </div>
               </div>
               ))}
@@ -170,27 +214,21 @@ class PatientListPage extends React.Component {
 
             <div className="col-4  border-left filters ">
             <div className="d-flex align-items-center justify-content-start flex-column">
-              <button type="button" className="btn btn-secondary w-50" style={{marginTop:"10px"}}>Today's Patients</button>
-              <button type="button" className="btn btn-secondary w-50" style={{marginTop:"10px"}}>Near Follow-up Patients</button>
-              <button type="button" className="btn btn-secondary w-50" style={{marginTop:"10px"}}>Recent chats patients</button>
-              <form className="w-100">
-              <div className="form-group">
-                <label  className="d-flex mt-4">Last appointment date:</label>
-                <input type="date" className="form-control" id="LastAppointmentDate" min="2022-01-01" max="2030-12-31"/>
-              </div>
-              <div className="form-group">
-                <label className="d-flex mt-4">Follow-up date:</label>
-                <input type="date" className="form-control" id="FollowUpDate" min="2022-01-01" max="2030-12-31"/>
-              </div>
-              <div className="d-flex align-items-center justify-content-end "><button type="submit" className="btn btn-success">Apply</button></div>
-            </form>
+              <button onClick={(event)=>this.filterTodayPatients()} type="button" className="btn btn-secondary w-50" style={{marginTop:"10px"}}>Today's Patients</button>
+              <button onClick={(event)=>this.filterFollowUpPatients()} type="button" className="btn btn-secondary w-50" style={{marginTop:"10px"}}>Near Follow-up Patients</button>
+              <button onClick={(event)=>this.GetPatients()} type="button" className="btn btn-secondary w-50" style={{marginTop:"10px"}}>All patients</button>
             </div>
             </div>
           </div>
-
         </div>
       );
     } 
   }
-  
-  export default PatientListPage;
+  const mapStateToProps = state =>{
+    return{
+      DoctorData:state.DoctorData,
+      DoctorID:state.DoctorID
+    };
+  };
+
+  export default connect(mapStateToProps, null)(PatientListPage);

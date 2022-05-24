@@ -115,13 +115,55 @@ class WelcomePage extends React.Component {
                 </div>
             </div>
         </section>
+        
+        <section id="ContactUs">
+        <div class="container-fluid">
+            <div class="container p-5">
+            <div class="row">
+                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="card h-100 shadow-lg">
+                    <div class="card-body">
+                    <div class="text-center p-3">
+                        <h5 class="card-title">One Month</h5>
+                        <span class="h2">250 EGP</span>
+                    </div>
+                    <p class="card-text">Get access To all Of our features for a month, with constant updates and technical support anywhere anytime</p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="card h-100 shadow-lg">
+                    <div class="card-body">
+                    <div class="text-center p-3">
+                        <h5 class="card-title">Six Months</h5>                        
+                        <span class="h2">1250 EGP</span> 
+                    </div>
+                    <p class="card-text">Get access To all Of our features for a month, with constant updates and technical support anywhere anytime</p>
+                    </div>
+                </div>
+                </div>
+                <div class="col-lg-4 col-md-12 mb-4">
+                <div class="card h-100 shadow-lg">
+                    <div class="card-body">
+                    <div class="text-center p-3">
+                        <h5 class="card-title">One Year</h5>
+                        <span class="h2">2000 EGP</span>
+                    </div>
+                    <p class="card-text">Get access To all Of our features for a month, with constant updates and technical support anywhere anytime</p>
+                    </div>
+                </div>
+                </div>
+            </div>    
+            </div>
+            </div>
+        </section>
 
-        <section className="call-to-action text-white text-center" id="ContactUs">
+        <section className="call-to-action text-white text-center" >
             <div className="container position-relative">
                 <div className="row justify-content-center">
                     <div className="col-xl-6">
                         <h2 className="mb-4">Ready to get started? Contact us Now!</h2>
-                        <div className="row">
+                        <div className="row mt-2">
                             <div className="col">
                                 <input className="form-control form-control-lg"  type="text" placeholder="Name"/>
                             </div>

@@ -1,6 +1,9 @@
 import React from 'react';
 import './AccountSettings.css';
-import MyMapComponent from './map';
+
+import {connect} from "react-redux";
+import {BASEURL} from '../../Containers/baseurl/baseurl';
+
 import {
   EmailShareButton,
   FacebookShareButton,
@@ -23,12 +26,7 @@ import {
 
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-function Iframe(props) {
-  return (<div dangerouslySetInnerHTML={ {__html:'<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1727.5023505754243!2d31.450859887542503!3d30.00802139786396!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9d5e3795b7660cf7!2zMzDCsDAwJzI5LjIiTiAzMcKwMjcnMDMuNCJF!5e0!3m2!1sar!2seg!4v1650415954632!5m2!1sar!2seg" width="250" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>'}} />);
-}
-
 class AccountSettings extends React.Component {
-
     render(){
       return (
         <div className ="account-settings">
@@ -44,9 +42,9 @@ class AccountSettings extends React.Component {
                     <div className="container border rounded" style={{backgroundColor:'white'}}>
                       <div className="d-flex align-items-end justify-content-center">
                         <div style={{fontSize: '15px',fontWeight: '600' ,color: '#00318B'}}>Dr.</div>
-                        <div style={{marginLeft: '5px',fontSize: '20px',fontWeight: '700',color: '#00318B'}}>Mohammed Nader</div>
+                        <div style={{marginLeft: '5px',fontSize: '20px',fontWeight: '700',color: '#00318B'}}>{this.props.DoctorData.personalData.FirstName + " " + this.props.DoctorData.personalData.LastName}</div>
                       </div>
-                      <div style={{color:"#676767",fontSize: '12px'}} className="d-flex justify-content-center">mnader93@yahoo.com</div>
+                      <div style={{color:"#676767",fontSize: '12px'}} className="d-flex justify-content-center">{this.props.DoctorData.personalData.Email}</div>
                       <img style={{height:"100px",width:"100px"}} src="https://barcodesegypt.com/wp-content/uploads/sites/123/2019/05/qr_code_5cdd30e269752.jpg"></img>
                       <div>
                         <i data-toggle="modal" data-target=".bd-example-modal-sm" class="fas fa-expand-alt" style={{cursor:"pointer"}}></i> 
@@ -61,7 +59,7 @@ class AccountSettings extends React.Component {
                           Practicing Since
                         </div>
                         <div className="d-flex justify-content-start" style={{color:"#727175",fontWeight:"700",fontSize:"14px"}}>
-                          2015
+                          1995
                         </div>
                       </div>
 
@@ -70,7 +68,7 @@ class AccountSettings extends React.Component {
                           Area of Practice
                         </div>
                         <div className="d-flex justify-content-start" style={{color:"#727175",fontWeight:"700",fontSize:"14px"}}>
-                          Gastroenterologist
+                          {this.props.DoctorData.personalData.AreaOfPractice}
                         </div>
                       </div>
                       <div className="border px-2">
@@ -78,15 +76,15 @@ class AccountSettings extends React.Component {
                         Biography
                         </div>
                         <div className="d-flex justify-content-start" style={{color:"#727175",fontWeight:"700",fontSize:"14px", textAlign:"start"}}>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text
+                          {this.props.DoctorData.personalData.Biography}
                         </div>
                       </div>
                       <div className="border px-2">
                         <div className="d-flex justify-content-start" style={{color:"#676767",fontSize:"13px"}}>
                         Clinic Name
                         </div>
-                        <div className="d-flex justify-content-start" style={{color:"#727175",fontWeight:"700",fontSize:"14px"}}>
-                        Ahmad Nader Clinic
+                        <div className="d-flex justify-content-start" style={{color:"#727175",fontWeight:"700",fontSize:"14px",textAlign:"left"}}>
+                          {this.props.DoctorData.clincData ? this.props.DoctorData.clincData.Name + " ( " + this.props.DoctorData.clincData.Contact[0] + "-" + this.props.DoctorData.clincData.Contact[1] + " )":""}
                         </div>
                       </div>
                       <div className="border px-2">
@@ -94,15 +92,9 @@ class AccountSettings extends React.Component {
                         Clinic Address
                         </div>
                         <div className="d-flex justify-content-start" style={{color:"#727175",fontWeight:"700",fontSize:"14px" ,  textAlign:"start"}}>
-                        Lorem Ipsum is simply dummy text of the printing
+                          {this.props.DoctorData.clincData ? this.props.DoctorData.clincData.Address : ""}
                         </div>
                       </div>
-                      {/* <div className="border px-2">
-                        <div className="d-flex justify-content-start" style={{color:"#676767",fontSize:"13px"}}>
-                          Clinic Location
-                        </div>
-                        <Iframe iframe={Iframe}/>
-                      </div> */}
                     </div>
 
                 </div>
@@ -123,13 +115,13 @@ class AccountSettings extends React.Component {
                           <div className='col-6'>
                             <div className="form-group">
                               <label  className="d-flex">First Name:</label>
-                              <input autocomplete="off" type="text" className="form-control" id="FirstName"  placeholder="Ex: Mohammed"/>
+                              <input autocomplete="off" type="text" className="form-control" id="FirstName" value={this.props.DoctorData.personalData.FirstName} placeholder="Ex: Mohammed"/>
                             </div>
                           </div>
                           <div className='col-6'>
                             <div className="form-group">
                               <label  className="d-flex">Last Name:</label>
-                              <input autocomplete="off" type="text" className="form-control" id="LastName" placeholder="Ex: Nader"/>
+                              <input autocomplete="off" type="text" className="form-control" id="LastName" value={this.props.DoctorData.personalData.LastName} placeholder="Ex: Nader"/>
                             </div>
                           </div>
                         </div>
@@ -141,21 +133,25 @@ class AccountSettings extends React.Component {
                       <div className="form-group ">
                         <label  className="d-flex">Gender:</label>
                         <div class="form-check-inline">
-                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="Male" checked/>
-                          <label class="form-check-label mr-3" >
-                            Male
-                          </label>
-                          <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="Female" />
-                          <label class="form-check-label" >
-                            Female
-                          </label>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
+                            <label class="form-check-label mr-3" >
+                              Male
+                            </label>
+                          </div>
+                          <div class="form-check">
+                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" />
+                            <label class="form-check-label" >
+                              Female
+                            </label>
+                          </div>
                         </div>
                       </div>
                       </div>
                       <div className="col-7">
                       <div className="form-group">
                         <label  className="d-flex">Age:</label>
-                        <input autocomplete="off" type="number" className="form-control" id="Age" placeholder="Ex: 22 years"/>
+                        <input autocomplete="off" type="text" className="form-control" id="Age" value={this.props.DoctorData.personalData.Age} placeholder="Ex: 22 years"/>
                       </div>
                       </div>
                       </div>
@@ -163,7 +159,7 @@ class AccountSettings extends React.Component {
                     <div className='col-6'>
                       <div className="form-group">
                         <label  className="d-flex">Birth Date:</label>
-                        <input type="date" className="form-control" id="Birth Date"  min="1990-01-01" max="2023-12-31"/>
+                        <input type="date" className="form-control" id="Birth Date" value={this.props.DoctorData.personalData.BirthDate.split("T")[0]}  min="1990-01-01" max="2023-12-31"/>
                       </div>
                     </div>
                   </div>
@@ -172,13 +168,13 @@ class AccountSettings extends React.Component {
                     <div className='col-6'>
                       <div className="form-group">
                         <label  className="d-flex">Mobile Number:</label>
-                        <input autocomplete="off" type="text" className="form-control" id="MobileNumber" placeholder="Ex: 01552099261"/>
+                        <input autocomplete="off" type="text" className="form-control" value={this.props.DoctorData.personalData.MobileNumber} id="MobileNumber" placeholder="Ex: 01552099261"/>
                       </div>
                     </div>
                     <div className='col-6'>
                       <div className="form-group">
                         <label  className="d-flex">Email Address:</label>
-                        <input autocomplete="off" type="email" className="form-control" id="Email" placeholder="Ex: mnader93@yahoo.com"/>
+                        <input autocomplete="off" type="email" className="form-control" id="Email" value={this.props.DoctorData.personalData.Email} placeholder="Ex: mnader93@yahoo.com"/>
                       </div>
                     </div>
                     </div>
@@ -203,7 +199,7 @@ class AccountSettings extends React.Component {
                                 <div className='col-12'>
                                   <div class="form-group">
                                     <label  className="d-flex">Biography:</label>
-                                    <textarea class="form-control" id="Biography" rows="2"></textarea>
+                                    <textarea class="form-control" value={this.props.DoctorData.personalData.Biography} id="Biography" rows="2"></textarea>
                                   </div>
                                 </div>
                               </div>
@@ -212,13 +208,13 @@ class AccountSettings extends React.Component {
                                 <div className='col-6'>
                                   <div className="form-group">
                                     <label  className="d-flex">Clinic Name:</label>
-                                    <input autocomplete="off" type="text" className="form-control" id="ClinicName" placeholder="Ex: Ahmad nader's Clinic"/>
+                                    <input autocomplete="off" type="text" value={this.props.DoctorData.clincData ? this.props.DoctorData.clincData.Name:""} className="form-control" id="ClinicName" placeholder="Ex: Ahmad nader's Clinic"/>
                                   </div>
                                 </div>
                                 <div className='col-6'>
                                   <div className="form-group">
                                     <label  className="d-flex">Area of Practice:</label>
-                                    <input autocomplete="off" type="text" className="form-control" id="AreaofPractice" placeholder="Ex: opthalmology"/>
+                                    <input autocomplete="off" type="text" value={this.props.DoctorData.personalData.AreaOfPractice} className="form-control" id="AreaofPractice" placeholder="Ex: opthalmology"/>
                                   </div>
                                 </div>
                               </div>
@@ -227,7 +223,7 @@ class AccountSettings extends React.Component {
                                 <div className='col-12'>
                                   <div class="form-group">
                                     <label  className="d-flex">Clinic address:</label>
-                                    <textarea class="form-control" id="ClinicAddress" rows="2"></textarea>
+                                    <textarea class="form-control" value={this.props.DoctorData.clincData ? this.props.DoctorData.clincData.Address : ""} id="ClinicAddress" rows="2"></textarea>
                                   </div>
                                 </div>
                               </div>
@@ -386,5 +382,12 @@ class AccountSettings extends React.Component {
       );
     } 
   }
-  
-  export default AccountSettings;
+
+  const mapStateToProps = state =>{
+    return{
+      DoctorData:state.DoctorData,
+      DoctorID:state.DoctorID
+    };
+  };
+
+  export default connect(mapStateToProps, null)(AccountSettings);

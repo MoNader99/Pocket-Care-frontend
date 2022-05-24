@@ -1,5 +1,5 @@
 
-header.masthead {
+.welcome-page header.masthead {
   position: relative;
   background-color: #343a40;
   background: url("https://docpulse.com/wp-content/uploads/2020/01/banner-1.jpg") no-repeat center center;
@@ -7,7 +7,7 @@ header.masthead {
   padding-top: 4rem;
   padding-bottom: 4rem;
 }
-header.masthead:before {
+.welcome-page header.masthead:before {
   content: "";
   position: absolute;
   height: 100%;
@@ -16,49 +16,46 @@ header.masthead:before {
   left: 0;
   opacity: 0.5;
 }
-header.masthead h1, header.masthead .h1 {
+.welcome-page header.masthead h1, header.masthead .h1 {
   font-size: 2rem;
 }
 @media (min-width: 768px) {
-  header.masthead {
+  .welcome-page header.masthead {
     padding-top: 12rem;
     padding-bottom: 12rem;
   }
-  header.masthead h1, header.masthead .h1 {
+  .welcome-page header.masthead h1, header.masthead .h1 {
     font-size: 3rem;
   }
 }
 
 
-.features-icons {
+.welcome-page .features-icons {
   padding-top: 7rem;
 }
-.features-icons .features-icons-item {
+.welcome-page .features-icons .features-icons-item {
   max-width: 20rem;
 }
-.features-icons .features-icons-item .features-icons-icon {
+.welcome-page .features-icons .features-icons-item .features-icons-icon {
   height: 7rem;
 }
-.features-icons .features-icons-item .features-icons-icon i {
+.welcome-page .features-icons .features-icons-item .features-icons-icon i {
   font-size: 4.5rem;
 }
 
-
-
-
-.testimonials {
+.welcome-page .testimonials {
   padding-top: 7rem;
   padding-bottom: 7rem;
 }
-.testimonials .testimonial-item {
+.welcome-page .testimonials .testimonial-item {
   max-width: 18rem;
 }
-.testimonials .testimonial-item img {
+.welcome-page .testimonials .testimonial-item img {
   max-width: 12rem;
   box-shadow: 0px 5px 5px 0px #adb5bd;
 }
 
-.call-to-action {
+.welcome-page .call-to-action {
   position: relative;
   background-color: #343a40;
   /* background: url("../assets/img/bg-masthead.jpg") no-repeat center center; */
@@ -66,7 +63,7 @@ header.masthead h1, header.masthead .h1 {
   padding-top: 7rem;
   padding-bottom: 7rem;
 }
-.call-to-action:before {
+.welcome-page .call-to-action:before {
   content: "";
   position: absolute;
   background-color: #1c375e;
@@ -77,7 +74,39 @@ header.masthead h1, header.masthead .h1 {
   opacity: 0.5;
 }
 
-footer.footer {
+.welcome-page footer.footer {
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+
+.welcome-page .card {
+  background-color: #04a39d;
+  border: none;
+  padding: 10px 50px;
+  color: white;
+}
+
+.welcome-page .card::after {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+  transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.welcome-page .card:hover {
+  transform: scale(1.02, 1.02);
+  -webkit-transform: scale(1.02, 1.02);
+  backface-visibility: hidden; 
+  will-change: transform;
+  box-shadow: 0 1rem 3rem rgba(0,0,0,.75) !important;
+}
+
+.welcome-page .card:hover::after {
+  opacity: 1;
+}
+
+.welcome-page .card:hover .btn-outline-primary{
+  color:white;
+  background:#007bff;
 }
